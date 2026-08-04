@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Canon"
+  short_description: "整理产品核心文档、划定当前切片并防止规格无限拆分"
+  default_prompt: "Use $product-canon to turn confirmed product intent into a stable product canon and one bounded implementation slice."
