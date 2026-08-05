@@ -13,6 +13,7 @@ This layer preserves the complete product journey. It does not create Specs.
 ## Spec handoff rules
 
 - Record vertical, independently demonstrable user outcomes; do not split by technical component.
+- `Spec` means the approved delivery specification or equivalent technical specification. Speckit is one optional consumer, not a universal requirement.
 - Only explicit approval of the exact user outcome, boundary, and acceptance may move an entry to `APPROVED`.
 - One `APPROVED` entry maps to one Spec by default.
 - Splitting or merging entries requires a ROADMAP change and explicit user approval.

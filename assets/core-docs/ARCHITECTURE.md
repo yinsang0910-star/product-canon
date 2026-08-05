@@ -1,6 +1,6 @@
 # Architecture
 
-> Authority: system responsibilities, single-authority paths, data/state ownership, integrations, and failure invariants.
+> Authority: digital and physical system responsibilities, single-authority control/state/data paths, integrations, and failure invariants.
 
 ## System context
 
@@ -11,7 +11,7 @@
 | Component | Owns | Must not own |
 | --- | --- | --- |
 
-## State and data authorities
+## Control, state, and data authorities
 
 | Concern | Single authority | Consumers |
 | --- | --- | --- |
