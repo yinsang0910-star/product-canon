@@ -11,17 +11,17 @@
 
 > 把用户确认的产品意志与可验证的当前事实，整理成稳定、简洁、互不争权的产品核心文档。
 
-`product-canon` 是一个 Codex skill（技能），负责建立、迁移、修正和审计产品核心文档。它不创建 Spec、不拆实施切片，也不充当第二套任务系统。
+`product-canon` 是一个低频 Codex skill（技能），只负责项目定调初始化、完成产品追问后的落盘，或用户明确要求的核心意志归并重建。它不负责日常审计、整理、纠错或状态维护，也不创建 Spec、不拆实施切片。
 
 <details>
 <summary>English summary</summary>
 
-`product-canon` establishes, migrates, corrects, and audits exactly five authoritative product documents. It preserves non-canon references and hands only user-approved ROADMAP entries to specification workflows such as Speckit.
+`product-canon` initializes or explicitly re-founds exactly five authoritative product documents. It is not a routine audit or maintenance tool and hands only user-approved ROADMAP entries to specification workflows such as Speckit.
 </details>
 
 ## 固定五文件 Five authorities
 
-执行建立或迁移时，只在 `docs/product/` 建立以下五个核心文件：
+执行项目定调初始化或显式归并重建时，只在 `docs/product/` 建立以下五个核心文件：
 
 | 文件 | 唯一职责 |
 | --- | --- |
@@ -46,17 +46,18 @@ flowchart LR
 
 ## 什么时候使用 When to use
 
-| 场景 / Need | 模式 / Mode | 结果 / Result |
+| 场景 / Need | 入口 / Entry | 结果 / Result |
 | --- | --- | --- |
-| 启动产品 | 建立 / Establish | 创建固定五文件 |
-| 核心文档过多或命名混乱 | 迁移 / Migrate | 形成五文件迁移映射并保留非核心材料 |
-| 新决定取代旧决定 | 修正 / Correct | 只修改承担该职责的核心文件 |
-| 检查冲突、遗漏或事实漂移 | 审计 / Audit | 只读报告，不擅自写入 |
+| 初始化项目并确定产品方向 | 项目定调初始化 | 创建固定五文件 |
+| 产品类 grilling 连续追问已确认完成 | Grilling 交接 | 把已确认决定落入固定五文件 |
+| 用户明确要求归纳重建核心、愿景和需求 | 显式归并重建 | 完整迁移旧意志并保留非核心材料 |
+
+普通阅读、审核、整理、纠错、状态刷新、ROADMAP 维护、Spec 核对或验收检查都不触发本 Skill。
 
 ## 怎么使用 Use
 
 ```text
-使用 $product-canon，把本项目的产品权威迁移到固定五文件；保留非核心开发、合规、参考、证据和历史文档，不创建 Spec。
+使用 $product-canon，显式归并重建本项目的核心愿景、需求和用户意志，输出固定五文件；保留非核心开发、合规、参考、证据和历史文档，不创建 Spec。
 ```
 
 ## ROADMAP 与 Speckit
