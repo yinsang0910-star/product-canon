@@ -28,7 +28,7 @@
 | `PRODUCT.md` | 产品承诺、用户结果、可见行为、配置方式和永久边界 |
 | `ARCHITECTURE.md` | 组件责任、单一状态/数据权威、关键路径和故障不变量 |
 | `ACCEPTANCE.md` | 完成判定、所需证据、失败/恢复证据和不证明事项 |
-| `ROADMAP.md` | 用户批准的纵向交付结果、依赖、状态和 Spec 交接 |
+| `ROADMAP.md` | 完整产品路线，以及用户批准的纵向交付结果、依赖、状态和 Spec 交接 |
 | `CURRENT_STATE.md` | 当前源码与运行环境已验证、未验证、阻塞和证据指针 |
 
 模板只固定文件名、职责和最小骨架，不强迫所有产品采用相同业务章节。未知内容写 `UNKNOWN` 或 `NOT_VERIFIED`，不靠猜测补齐。
@@ -36,11 +36,12 @@
 ```mermaid
 flowchart LR
     U[用户明确决定] --> P[PRODUCT]
-    U --> R[ROADMAP 交付表]
+    U --> R[ROADMAP 产品路线]
+    R --> H[ROADMAP Spec 交接表]
     P --> A[ARCHITECTURE]
     P --> C[ACCEPTANCE]
     E[源码与运行证据] --> S[CURRENT_STATE]
-    R -->|首个合格的 APPROVED 条目| K[Speckit 等规格流程]
+    H -->|首个合格的 APPROVED 条目| K[Speckit 等规格流程]
 ```
 
 ## 什么时候使用 When to use
@@ -60,7 +61,14 @@ flowchart LR
 
 ## ROADMAP 与 Speckit
 
-只有 `ROADMAP.md` 中这一张固定交接表参与切片：
+`ROADMAP.md` 有两个层次：
+
+- **产品路线**完整保留已经确认的阶段、能力范围、顺序和未决事项，但不产生 Spec。
+- **Spec 交接表**只包含用户明确批准的近期交付结果；只有这一张固定表参与切片。
+
+交接表为空是合法状态。禁止因为“不自动生成 Spec”而省略旧产品路线，也禁止把产品终局自动展开成推测性的 Spec 清单。
+
+固定交接表为：
 
 ```text
 ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
@@ -69,6 +77,8 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 - 只有用户明确批准的条目才能进入 `APPROVED`。
 - 默认一个 `APPROVED` 条目对应一个 Spec。
 - 下一条是依赖均为 `ACCEPTED` 的首个 `APPROVED` 条目。
+- ROADMAP ID 由产品讨论确定，不从 `011-*` 一类 Spec 目录序号生成。
+- 旧 Spec 不会在迁移时自动绑定到新条目。
 - Spec 工作流只能填写 `Spec` 并推进 `Status`，不能改写用户结果、边界或验收。
 - `CURRENT_STATE.md` 只引用活动 ROADMAP ID，不建立第二份队列。
 
