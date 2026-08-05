@@ -1,11 +1,13 @@
 ---
 name: product-canon
-description: "Initialize or explicitly re-found a project's durable product canon as exactly five fixed documents under docs/product: PRODUCT.md, ARCHITECTURE.md, ACCEPTANCE.md, ROADMAP.md, and CURRENT_STATE.md. Use only when the user asks to initialize a project and set its product direction, a completed grilling interview hands off confirmed product decisions, or the user explicitly asks to consolidate/rebuild the project's core vision, requirements, and user intent. Do not trigger for ordinary document reading, review, audit, cleanup, routine correction or status refresh, ROADMAP maintenance, Spec work, implementation, or acceptance checking."
+description: "Initialize or explicitly re-found the durable product canon of a repository-based technical product as exactly five fixed documents under docs/product: PRODUCT.md, ARCHITECTURE.md, ACCEPTANCE.md, ROADMAP.md, and CURRENT_STATE.md. Applies to software, AI/model/data, hardware/firmware/IoT/robotics, and hybrid technical products with a versioned workspace and verifiable delivery evidence. Use only when the user initializes the product and sets its direction, a completed product-focused grilling interview hands off confirmed decisions, or the user explicitly requests a full consolidation/re-foundation of core vision, requirements, and user intent. Do not trigger for generic project management, content or marketing work, research without a product delivery target, ordinary document maintenance, ROADMAP maintenance, Spec work, implementation, or acceptance checking."
 ---
 
 # Product Canon
 
-在项目定调初始化或用户明确要求重建核心意志时，把已确认的产品决定和当时可验证的起点事实归入固定五文件结构。它是低频的建制工具，不是日常文档维护器。
+在仓库或版本化项目空间内进行技术产品定调初始化，或用户明确要求重建核心意志时，把已确认的产品决定和当时可验证的起点事实归入固定五文件结构。它是低频的建制工具，不是日常文档维护器。
+
+“技术产品”必须同时具有明确用户结果、可说明的系统结构、可验证的完成条件、交付路线，以及当前实现、原型或运行证据。软件、AI/模型/数据、硬件/固件/IoT/机器人和软硬件混合产品可以使用；泛项目管理、营销或内容工作、个人计划，以及没有产品交付目标的纯研究不适用。
 
 不要把当前项目已有的文件数量、文件名或历史结构复制成通用模板。
 
@@ -16,27 +18,27 @@ description: "Initialize or explicitly re-found a project's durable product cano
 | 文件 | 唯一职责 |
 | --- | --- |
 | `PRODUCT.md` | 产品承诺、用户、用户结果、可见行为、配置方式和永久边界 |
-| `ARCHITECTURE.md` | 系统上下文、组件责任、单一状态/数据权威、关键路径和故障不变量 |
+| `ARCHITECTURE.md` | 系统上下文、数字/物理组件责任、单一控制/状态/数据权威、关键路径和故障不变量 |
 | `ACCEPTANCE.md` | “完成”的判定、声明所需证据、失败/恢复证据和不证明事项 |
 | `ROADMAP.md` | 完整产品路线，以及用户批准的纵向交付结果、依赖、顺序、状态和 Spec 交接 |
-| `CURRENT_STATE.md` | 源码与运行环境当前已验证、未验证、阻塞和证据指针 |
+| `CURRENT_STATE.md` | 当前实现、原型和运行状态中已验证、未验证、阻塞及证据指针 |
 
 使用 `assets/core-docs/` 中的同名模板。模板只固定文件名、职责和最小骨架；不要把某个项目的业务章节变成所有项目都必须填写的通用章节。信息不足时保留 `UNKNOWN` 或 `NOT_VERIFIED`，不要猜测，也不要新增第六个核心文件。
 
 “固定五文件”只限制**核心权威入口**，不限制仓库的文档总数。以下材料可以继续独立存在，并且不计入五个核心文件：
 
-- 开发协作与实施材料，例如 `AGENTS.md`、Spec、plan 和 tasks；
+- 开发协作与交付规格，例如 `AGENTS.md`、Spec、plan 和 tasks；
 - 合规、许可、第三方来源与 provenance（来源归属）记录；
-- vendor（供应商）原文、API 参考、ADR、设计稿和研究资料；
-- 测试、运行证据、发布回执、迁移说明和历史归档。
+- 源码、模型、数据集、固件、CAD/BOM、vendor（供应商）原文、API 参考、ADR、设计稿和研究资料；
+- 测试、评测、原型/设备验证、运行证据、发布回执、迁移说明和历史归档。
 
 不要仅因为一个文件不属于五个核心文件就删除、合并或改名。它可以提供输入、证据或历史，但不能与五个核心文件争夺产品权威。
 
 ## 权威边界
 
 - 采用用户本轮明确决定；它优先于旧聊天、旧报告、技能建议、测试和局部实现。
-- 用 `PRODUCT.md`、`ARCHITECTURE.md` 和 `ACCEPTANCE.md` 记录稳定目标与规则；不要让当前代码反向缩小目标。
-- 用 `CURRENT_STATE.md` 记录源码和运行证据；没有直接证据时写 `NOT_VERIFIED`。
+- 用 `PRODUCT.md`、`ARCHITECTURE.md` 和 `ACCEPTANCE.md` 记录稳定目标与规则；不要让当前实现反向缩小目标。
+- 用 `CURRENT_STATE.md` 记录当前实现、原型和运行证据；没有直接证据时写 `NOT_VERIFIED`。
 - 用 `ROADMAP.md` 的产品路线保留已确认的阶段和顺序，用其中唯一的 Spec 交接表交付已批准的下一项；不要在 `CURRENT_STATE.md` 建立第二份下一步清单。
 - 把同一声明放在一个文件；其它文件只链接，不复制正文。
 - Git 中的 `M`、`U`、`??` 或“工作树有改动”只表示文件尚未进入当前提交，不表示内容正确、错误、过时或已获用户确认。
@@ -46,8 +48,8 @@ description: "Initialize or explicitly re-found a project's durable product cano
 
 只允许以下两类入口：
 
-1. **项目定调初始化**：用户明确要初始化项目、确定产品方向并输出核心文档；或者产品类 Grilling 连续追问已经结束、用户确认形成共同理解，由 Grilling 自动交接已确认决定。
-2. **显式归并重建**：用户明确要求把当前项目分散的核心、愿景、需求或用户核心意志重新归纳为权威文档。
+1. **技术产品定调初始化**：用户明确要初始化仓库内技术产品、确定产品方向并输出核心文档；或者产品类 Grilling 连续追问已经结束、用户确认形成共同理解，由 Grilling 自动交接已确认决定。
+2. **显式归并重建**：用户明确要求把当前技术产品分散的核心、愿景、需求或用户核心意志重新归纳为权威文档。
 
 除此之外不要启用本 Skill。普通阅读、检查、审计、评审、整理、纠错、同步状态、维护 ROADMAP、核对 Spec、验收声明或实现工作，都由普通任务或对应专业流程处理。即使某份核心文档可能过时，也不能因此隐式触发。
 
@@ -62,9 +64,9 @@ description: "Initialize or explicitly re-found a project's durable product cano
 1. 项目的 `AGENTS.md` 或同等协作规则。
 2. 用户本轮明确决定。
 3. 项目声明为权威的产品、架构、路线图、验收和当前状态文档。
-4. 仅在核对当前事实时读取最小范围源码、差异和运行证据。
+4. 仅在核对当前事实时读取最小范围的实现资产、差异、原型或运行证据。
 
-不要为了完整而扫描无关源码、历史聊天、旧报告或全部 Spec。
+不要为了完整而扫描无关实现资产、历史聊天、旧报告或全部 Spec。
 
 ### 2. 建立声明映射
 
@@ -76,7 +78,7 @@ description: "Initialize or explicitly re-found a project's durable product cano
 | 系统由谁负责什么、唯一权威路径、数据与故障边界 | `ARCHITECTURE.md` |
 | 什么证据才能声称完成、哪些证据不能证明完成 | `ACCEPTANCE.md` |
 | 完整产品路线、哪些用户结果获准交付、先后依赖和 Spec 状态 | `ROADMAP.md` |
-| 当前源码/运行环境实际做到什么、还缺什么 | `CURRENT_STATE.md` |
+| 当前实现、原型或运行状态实际做到什么、还缺什么 | `CURRENT_STATE.md` |
 
 无法唯一归类时，先判断它是否真是核心产品权威。不是则留在原有非核心文档，不新增核心文件。
 
@@ -119,9 +121,11 @@ description: "Initialize or explicitly re-found a project's durable product cano
 ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 ```
 
+这里的 `Spec` 指已批准交付结果的正式交付规格或等价技术规格。软件项目可以绑定 Speckit Spec；其它技术产品可以绑定模型评测、固件、硬件原型、系统集成或验证规格。它是交接指针，不要求所有领域使用同一种工具。
+
 遵守以下规则：
 
-- 只记录纵向、可独立演示和验收的用户结果；不按前端、后端、API、数据库或团队拆条目。
+- 只记录纵向、可独立演示和验收的用户结果；不按软件层、模型、数据、固件、硬件部件或团队拆条目。
 - 只有用户明确批准了准确的 `User outcome`、`Boundary` 和 `Acceptance`，条目才能进入 `APPROVED`；交接表为空是合法状态。
 - “不要根据产品终局自动生成完整实施清单”只约束 Spec 交接表，不允许借此删除、压缩或漏掉产品路线。
 - 默认一个 `APPROVED` 条目对应一个 Spec；拆分或合并必须先修改 ROADMAP 并获得用户批准，Spec 工作流不得自行扩张数量。
@@ -133,7 +137,7 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 
 允许的状态只有：`PROPOSED`、`APPROVED`、`SPECIFIED`、`IMPLEMENTING`、`BLOCKED`、`ACCEPTED`。
 
-本 Skill 只在建立或显式归并重建时生成 ROADMAP 结构并记录当次已确认决定；它不负责日常维护 ROADMAP，不创建或修改 Spec、plan、tasks，不执行切片，也不充当调度器。Speckit 等规格流程消费一个合格的 `APPROVED` 条目。
+本 Skill 只在建立或显式归并重建时生成 ROADMAP 结构并记录当次已确认决定；它不负责日常维护 ROADMAP，不创建或修改 Spec、plan、tasks，不执行切片，也不充当调度器。Speckit 或其它领域规格流程可以消费一个合格的 `APPROVED` 条目。
 
 ## 验证
 
@@ -143,14 +147,14 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 2. 非核心开发、合规、参考、证据和历史文档没有因“五文件”规则被擅自删除或吞并。
 3. 每个迁移输入和每项旧核心决定都有处理方式；`UNRESOLVED` 没有被静默丢弃、写成已取代或在切换权威后继续悬空。
 4. 已有产品路线完整进入 `Product route`；交接表的列名、状态值和 ID 唯一性符合契约，且没有未获批准的旧 Spec 绑定。
-5. `CURRENT_STATE.md` 的完成声明有直接证据或 `NOT_VERIFIED`，且本次没有越界修改 Spec、源码、数据库或运行系统。
+5. `CURRENT_STATE.md` 的完成声明有直接证据或 `NOT_VERIFIED`，且本次没有越界修改 Spec、实现资产、原型、设备、数据库或运行系统。
 
 ## 停止条件
 
 遇到以下情况时停止扩大修改并指出一个具体缺口：
 
 - 两个当前用户决定互相冲突，且会改变产品方向或永久边界。
-- 缺少会改变核心用户结果、安全边界、真实账户、实盘、数据迁移或主流程的决定。
+- 缺少会改变核心用户结果、安全边界、身份/权限、不可逆外部动作、受控设备、数据迁移或主流程的决定。
 - 无法判断被删除、缩短或改写的内容是否由用户明确取代。
 - 请求已进入 Spec 拆分、实施、排期或运行验收执行。
 - 迁移需要删除、重命名或覆盖受保护文件，但用户尚未授权该动作。
@@ -159,8 +163,8 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 
 最多输出五项：
 
-1. 使用的入口：项目定调初始化（含 Grilling 交接）或显式归并重建。
+1. 使用的入口：技术产品定调初始化（含 Grilling 交接）或显式归并重建。
 2. 固定五个核心文件及非核心文档的保留状态。
 3. 实际修改或迁移位置。
 4. 未解决的用户决定；没有则写“无”。
-5. 当前仍未由源码或运行证据证明的事项。
+5. 当前仍未由实现、原型或运行证据证明的事项。

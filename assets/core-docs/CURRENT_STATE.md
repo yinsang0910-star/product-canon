@@ -1,11 +1,11 @@
 # Current State
 
-> Authority: current source and runtime truth only. It does not redefine the product or delivery order.
+> Authority: current implementation, prototype, and operational truth only. It does not redefine the product or delivery order.
 
 ## Snapshot
 
 - Date: `UNKNOWN`
-- Source revision: `NOT_VERIFIED`
+- Baseline / revision: `NOT_VERIFIED`
 - Active ROADMAP ID: `NONE`
 
 ## Verified now
