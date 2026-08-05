@@ -5,78 +5,103 @@
 </p>
 
 <p align="center">
-  <strong>先把产品意志定准，再把实现切片做小。</strong><br>
-  <sub>Make product intent authoritative, then make the implementation slice small.</sub>
+  <strong>固定五个产品权威入口，让目标、交付顺序和当前事实各归其位。</strong><br>
+  <sub>Five stable product authorities. One clear handoff to delivery.</sub>
 </p>
 
-> 把已确认的产品意志，整理成稳定的产品核心文档，再收敛成一个可独立演示的实现切片。
+> 把用户确认的产品意志与可验证的当前事实，整理成稳定、简洁、互不争权的产品核心文档。
 
-`product-canon` 是一个 Codex skill（技能），用于让产品决策保持权威、清晰、有边界，并且能直接服务于开发。它在开始编码前帮助团队回答两个问题：
-
-1. 用户到底确认了什么？
-2. 现在最值得实现的最小完整结果是什么？
+`product-canon` 是一个 Codex skill（技能），负责建立、迁移、修正和审计产品核心文档。它不创建 Spec、不拆实施切片，也不充当第二套任务系统。
 
 <details>
 <summary>English summary</summary>
 
-`product-canon` is a Codex skill for keeping product decisions authoritative, bounded, and useful to implementation. It turns confirmed intent into one independently demonstrable slice.
+`product-canon` establishes, migrates, corrects, and audits exactly five authoritative product documents. It preserves non-canon references and hands only user-approved ROADMAP entries to specification workflows such as Speckit.
 </details>
+
+## 固定五文件 Five authorities
+
+执行建立或迁移时，只在 `docs/product/` 建立以下五个核心文件：
+
+| 文件 | 唯一职责 |
+| --- | --- |
+| `PRODUCT.md` | 产品承诺、用户结果、可见行为、配置方式和永久边界 |
+| `ARCHITECTURE.md` | 组件责任、单一状态/数据权威、关键路径和故障不变量 |
+| `ACCEPTANCE.md` | 完成判定、所需证据、失败/恢复证据和不证明事项 |
+| `ROADMAP.md` | 用户批准的纵向交付结果、依赖、状态和 Spec 交接 |
+| `CURRENT_STATE.md` | 当前源码与运行环境已验证、未验证、阻塞和证据指针 |
+
+模板只固定文件名、职责和最小骨架，不强迫所有产品采用相同业务章节。未知内容写 `UNKNOWN` 或 `NOT_VERIFIED`，不靠猜测补齐。
 
 ```mermaid
 flowchart LR
-    A[已确认的产品意志] --> B[产品典籍]
-    B --> C[当前实现切片]
-    C --> D[开发流程]
-    E[源码与运行事实] --> B
+    U[用户明确决定] --> P[PRODUCT]
+    U --> R[ROADMAP 交付表]
+    P --> A[ARCHITECTURE]
+    P --> C[ACCEPTANCE]
+    E[源码与运行证据] --> S[CURRENT_STATE]
+    R -->|首个合格的 APPROVED 条目| K[Speckit 等规格流程]
 ```
 
 ## 什么时候使用 When to use
 
-| 场景 / Need | 模式 / Mode | 产出 / Result |
+| 场景 / Need | 模式 / Mode | 结果 / Result |
 | --- | --- | --- |
-| 启动一个产品 | 建立 / Establish | 最小核心文档结构 |
-| 修正一个决定 | 修正 / Correct | 当前决定取代过时决定 |
-| 检查产品事实 | 审计 / Audit | 冲突、遗漏、重复与范围漂移 |
-| 选择现在要做的事 | 选切片 / Select slice | 一个有验收证据的用户可见结果 |
+| 启动产品 | 建立 / Establish | 创建固定五文件 |
+| 核心文档过多或命名混乱 | 迁移 / Migrate | 形成五文件迁移映射并保留非核心材料 |
+| 新决定取代旧决定 | 修正 / Correct | 只修改承担该职责的核心文件 |
+| 检查冲突、遗漏或事实漂移 | 审计 / Audit | 只读报告，不擅自写入 |
 
 ## 怎么使用 Use
 
-在支持 Codex skills 的环境中这样调用：
-
 ```text
-使用 $product-canon，把已确认的产品意志整理成稳定的产品典籍，并选出一个有边界的实现切片。
+使用 $product-canon，把本项目的产品权威迁移到固定五文件；保留非核心开发、合规、参考、证据和历史文档，不创建 Spec。
 ```
 
-技能只读取当前决定所需的上下文，然后返回：
+## ROADMAP 与 Speckit
 
-- 当前产品结论；
-- 典籍中的冲突或遗漏；
-- 实际需要修改的文档位置；
-- 一份有边界的当前实现切片简报；
-- 仍需要用户授权的决定。
+只有 `ROADMAP.md` 中这一张固定交接表参与切片：
 
-## 边界 Boundaries
+```text
+ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
+```
 
-- 用户确认的意志高于旧聊天、报告、测试和局部实现细节。
-- 产品合同定义目标；源码与运行证据只描述当前事实。
-- 一个切片必须独立产生可演示、可验收的用户结果。
-- 本技能不会创建第二套任务系统、Gate、调度器、数据库或产品权威。
-- 真实供应商、真实账户、实盘订单、持久自动化和数据库迁移，都需要明确范围与授权。
+- 只有用户明确批准的条目才能进入 `APPROVED`。
+- 默认一个 `APPROVED` 条目对应一个 Spec。
+- 下一条是依赖均为 `ACCEPTED` 的首个 `APPROVED` 条目。
+- Spec 工作流只能填写 `Spec` 并推进 `Status`，不能改写用户结果、边界或验收。
+- `CURRENT_STATE.md` 只引用活动 ROADMAP ID，不建立第二份队列。
+
+## 非核心文档不会被吞掉
+
+固定五文件只限制核心权威入口。以下材料可以继续独立存在：
+
+- `AGENTS.md`、Spec、plan、tasks 和开发说明；
+- 合规、许可和第三方 provenance（来源归属）记录；
+- vendor 原文、API 参考、ADR、设计稿和研究资料；
+- 测试、运行证据、发布回执、迁移说明和历史归档。
+
+它们可以提供输入、证据或历史，但不能与五个核心文件争夺产品权威。
 
 ## 仓库结构 Repository layout
 
 ```text
 .
-├── SKILL.md                         # 技能正文与运行边界
-├── README.md                        # 中文优先的项目入口
-├── assets/product-canon-logo.svg    # 项目 SVG 标志
-└── agents/openai.yaml               # 展示元数据与默认调用提示
+├── SKILL.md
+├── README.md
+├── agents/openai.yaml
+└── assets
+    ├── product-canon-logo.svg
+    └── core-docs
+        ├── PRODUCT.md
+        ├── ARCHITECTURE.md
+        ├── ACCEPTANCE.md
+        ├── ROADMAP.md
+        └── CURRENT_STATE.md
 ```
 
 ## 设计原则 Design principle
 
-> 先修正权威和切片，再增加实现面。
->
-> Fix the authority and the slice before adding implementation surface area.
+> 产品意志归 PRODUCT，系统责任归 ARCHITECTURE，完成证据归 ACCEPTANCE，交付顺序归 ROADMAP，当前事实归 CURRENT_STATE。
 
-完整工作流与输出约定见 [`SKILL.md`](SKILL.md)。
+完整规则见 [`SKILL.md`](SKILL.md)。
