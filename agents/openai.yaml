@@ -1,4 +1,4 @@
 interface:
   display_name: "Product Canon"
-  short_description: "用固定五文件结构建立、迁移、修正与审计产品核心文档"
-  default_prompt: "使用 $product-canon，将本项目的产品权威整理为固定五个核心文件；完整保留既有产品路线，只把用户明确批准的结果放入 Spec 交接表，并保留非核心开发、合规、参考与历史文档；不创建 Spec。"
+  short_description: "初始化或显式重建项目的固定五文件产品权威"
+  default_prompt: "使用 $product-canon，为本项目定调并初始化固定五个核心文件；如果已有核心材料，完整归并其产品意志和路线，只把用户明确批准的结果放入 Spec 交接表；不做日常审计、维护或 Spec 工作。"

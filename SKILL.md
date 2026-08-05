@@ -1,17 +1,17 @@
 ---
 name: product-canon
-description: "Establish, migrate, correct, consolidate, or audit a product canon using exactly five fixed core-authority documents under docs/product: PRODUCT.md, ARCHITECTURE.md, ACCEPTANCE.md, ROADMAP.md, and CURRENT_STATE.md, while preserving non-canon development, compliance, provenance, reference, evidence, and history documents. Use when product intent, permanent boundaries, system responsibilities, delivery order, acceptance rules, or current implementation truth are missing, duplicated, contradictory, scattered across ad hoc core documents, or need a stable handoff to a specification workflow such as Speckit."
+description: "Initialize or explicitly re-found a project's durable product canon as exactly five fixed documents under docs/product: PRODUCT.md, ARCHITECTURE.md, ACCEPTANCE.md, ROADMAP.md, and CURRENT_STATE.md. Use only when the user asks to initialize a project and set its product direction, a completed grilling interview hands off confirmed product decisions, or the user explicitly asks to consolidate/rebuild the project's core vision, requirements, and user intent. Do not trigger for ordinary document reading, review, audit, cleanup, routine correction or status refresh, ROADMAP maintenance, Spec work, implementation, or acceptance checking."
 ---
 
 # Product Canon
 
-把用户确认的产品意志和可验证的当前事实归入固定五文件结构。保持产品权威简洁、唯一、可迁移，并为规格驱动开发提供稳定入口。
+在项目定调初始化或用户明确要求重建核心意志时，把已确认的产品决定和当时可验证的起点事实归入固定五文件结构。它是低频的建制工具，不是日常文档维护器。
 
 不要把当前项目已有的文件数量、文件名或历史结构复制成通用模板。
 
 ## 固定输出契约
 
-执行建立或迁移时，只在 `docs/product/` 建立以下五个核心文件，文件名和职责不得变化：
+执行初始化或显式归并重建时，只在 `docs/product/` 建立以下五个核心文件，文件名和职责不得变化：
 
 | 文件 | 唯一职责 |
 | --- | --- |
@@ -42,16 +42,17 @@ description: "Establish, migrate, correct, consolidate, or audit a product canon
 - Git 中的 `M`、`U`、`??` 或“工作树有改动”只表示文件尚未进入当前提交，不表示内容正确、错误、过时或已获用户确认。
 - diff（差异）的增加、删除和行数只描述文本变化。不要把删行、文件更短或时间更新推断为用户废止了某项决定；只有用户明确决定才能取代旧产品约束。
 
-## 工作模式
+## 触发闸门
 
-先把请求归为一种模式：
+只允许以下入口：
 
-1. **建立**：项目没有产品核心文档时，创建固定五文件。
-2. **迁移**：项目存在任意命名或重复核心文档时，映射、合并到固定五文件。
-3. **修正**：固定五文件已存在时，只修改承担该职责的文件。
-4. **审计**：只读报告缺失、冲突、重复、职责越界和迁移映射，不写文件。
+1. **项目定调初始化**：用户明确要初始化项目、确定产品方向并输出核心文档。
+2. **Grilling 交接**：连续追问已经结束，用户确认形成共同理解，且访谈主题是项目或产品的持久愿景与需求。
+3. **显式归并重建**：用户明确要求把当前项目分散的核心、愿景、需求或用户核心意志重新归纳为权威文档。
 
-用户没有要求修改文件时采用审计模式。不要把“检查”“看看”“是否正确”解释为写入授权。
+除此之外不要启用本 Skill。普通阅读、检查、审计、评审、整理、纠错、同步状态、维护 ROADMAP、核对 Spec、验收声明或实现工作，都由普通任务或对应专业流程处理。即使某份核心文档可能过时，也不能因此隐式触发。
+
+本 Skill 只有两种执行形态：首次**建立**，或在用户明确要求下进行一次完整的**归并重建**。它不提供日常“修正模式”或独立“审计模式”。归并重建内部仍要做迁移覆盖检查，但该检查不能作为单独使用场景。
 
 ## 执行流程
 
@@ -80,11 +81,11 @@ description: "Establish, migrate, correct, consolidate, or audit a product canon
 
 无法唯一归类时，先判断它是否真是核心产品权威。不是则留在原有非核心文档，不新增核心文件。
 
-### 3. 建立或迁移
+### 3. 建立或归并重建
 
 建立模式下，按模板一次创建五个文件；未知内容使用明确占位，不自行补全产品决定。
 
-迁移前先建立临时映射；把它放在本次审计或最终报告中，不创建第六个核心文件：
+归并重建前先建立临时映射；把它放在本次执行记录或最终报告中，不创建第六个核心文件：
 
 | 处理 | 含义 |
 | --- | --- |
@@ -93,7 +94,7 @@ description: "Establish, migrate, correct, consolidate, or audit a product canon
 | `ARCHIVE_CANDIDATE` | 可能只剩历史价值；只报告，得到删除/移动授权后再处理 |
 | `UNRESOLVED` | 无法判断是否仍有效；停止处理该部分并请求一个明确决定 |
 
-迁移模式下：
+归并重建时：
 
 1. 为每个现有核心候选文档或相关章节记录处理方式、目标和依据。
 2. 现有路线图中的阶段、顺序、依赖和未决事项默认 `MERGE_CORE` 到 `ROADMAP.md` 的产品路线；“不要自动生成 Spec”不能作为省略它们的理由。
@@ -103,12 +104,6 @@ description: "Establish, migrate, correct, consolidate, or audit a product canon
 6. 映射归零后才更新本次范围内的权威链接；未经授权，不删除、重命名、移动或覆盖旧文件。
 
 允许压缩重复措辞，但先确保每项明确产品决定、架构不变量、验收规则和当前事实都有目标或明确处理方式。文件变短、diff 删行或文本较新都不是“已经被取代”的证据。
-
-### 4. 修正
-
-只修改承担相应职责的文件。新决定取代旧决定时，删除被取代的正文，并在必要处保留一行迁移说明；不要保留两套同时生效的表述。
-
-每次修改后检查：目标、架构、验收、路线图和当前事实是否仍然互不代替。
 
 ## ROADMAP 与 Spec 工作流契约
 
@@ -139,11 +134,11 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 
 允许的状态只有：`PROPOSED`、`APPROVED`、`SPECIFIED`、`IMPLEMENTING`、`BLOCKED`、`ACCEPTED`。
 
-本 Skill 维护 ROADMAP 的结构并记录用户决定，但不创建或修改 Spec、plan、tasks，不执行切片，也不充当调度器。Speckit 等规格流程消费一个合格的 `APPROVED` 条目。
+本 Skill 只在建立或显式归并重建时生成 ROADMAP 结构并记录当次已确认决定；它不负责日常维护 ROADMAP，不创建或修改 Spec、plan、tasks，不执行切片，也不充当调度器。Speckit 等规格流程消费一个合格的 `APPROVED` 条目。
 
 ## 验证
 
-写入后执行 `python <skill>/scripts/validate_core_docs.py <project>/docs/product`；迁移模式增加 `--migration`。然后完成一次最小语义检查：
+写入后执行 `python <skill>/scripts/validate_core_docs.py <project>/docs/product`；归并重建时增加 `--migration`。然后完成一次最小语义检查：
 
 1. `docs/product/` 中五个固定核心文件全部存在，名称和大小写正确。
 2. 非核心开发、合规、参考、证据和历史文档没有因“五文件”规则被擅自删除或吞并。
@@ -165,7 +160,7 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 
 最多输出五项：
 
-1. 使用的模式。
+1. 使用的入口：项目定调初始化、Grilling 交接或显式归并重建。
 2. 固定五个核心文件及非核心文档的保留状态。
 3. 实际修改或迁移位置。
 4. 未解决的用户决定；没有则写“无”。
