@@ -13,9 +13,9 @@
 
 ## 中文说明
 
-`product-canon` 是一个面向仓库内技术产品开发的低频 Codex skill（技能）。它只在产品定调初始化，或用户明确要求重新归并产品核心愿景、需求和用户意志时运行。
+`product-canon` 是一个面向仓库内技术产品开发的低频 Codex skill（技能）。它在产品定调初始化、固定五文件定向更新，或用户明确要求重新归并产品核心愿景、需求和用户意志时运行。
 
-它把已确认的产品决定和当时可验证的起点事实整理为固定五份核心文档。它不负责日常审计、整理、纠错、状态刷新、ROADMAP 维护、Spec 编写或具体实施。
+它把已确认的产品决定和有直接证据的当前事实整理到固定五份核心文档。它不负责无新决定的日常审计、整理、纠错、状态刷新、ROADMAP 维护、Spec 编写或具体实施。
 
 适用对象包括软件、AI/模型/数据、硬件/固件/IoT/机器人，以及软硬件混合技术产品。产品必须具有版本化项目空间、明确用户结果、可说明的系统结构、可验证完成条件、交付路线和当前实现/原型/运行证据。泛项目管理、营销或内容工作、个人计划，以及没有产品交付目标的纯研究不适用。
 
@@ -33,14 +33,15 @@
 
 模板只固定文件名、职责和最小骨架。信息不足时写 `UNKNOWN` 或 `NOT_VERIFIED`，不靠猜测补齐，也不新增第六个核心权威文件。
 
-### 只在两类场景使用
+### 只在三类场景使用
 
 | 场景 | 入口 | 结果 |
 | --- | --- | --- |
 | 用户初始化仓库内技术产品并确定方向，或产品类 `grilling` 已结束且用户确认共同理解 | 技术产品定调初始化（含 Grilling 交接） | 创建固定五文件并落入已确认决定 |
+| 用户明确要求把已确认决定或有直接证据的当前事实写入一个或多个固定五文件；`grilling` 结束后且五文件已存在时也走这里 | 固定五文件定向更新 | 只更新受影响文件，保持其余权威不变 |
 | 用户明确要求归纳重建当前技术产品的核心、愿景、需求或用户核心意志 | 显式归并重建 | 完整迁移有效决定并保留非核心材料 |
 
-普通阅读、审核、审计、整理、纠错、状态刷新、ROADMAP 维护、Spec 核对、验收检查和实现工作都不触发本 Skill。
+普通非核心文档维护、无新决定的润色、阅读、审核、审计、纠错、状态刷新、ROADMAP 维护、Spec 核对、验收检查和实现工作都不触发本 Skill。
 
 ### 权威与交付关系
 
@@ -97,6 +98,12 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 使用 $product-canon，归并重建这个仓库内技术产品的核心愿景、需求和用户意志；完整保留有效产品路线与非核心历史，不创建 Spec。
 ```
 
+固定五文件定向更新：
+
+```text
+使用 $product-canon，把本次已确认的产品决定或有直接证据的当前事实更新到固定五文件中；只改受影响文件，不创建 Spec。
+```
+
 ### 仓库结构
 
 ```text
@@ -135,9 +142,9 @@ python scripts/validate_core_docs.py <project>/docs/product --migration
 
 ## English
 
-`product-canon` is a low-frequency Codex skill for technical products developed in a repository or versioned project workspace. It runs only when the product is being initialized and given a durable direction, or when the user explicitly asks to consolidate and re-found its core vision, requirements, and user intent.
+`product-canon` is a low-frequency Codex skill for technical products developed in a repository or versioned project workspace. It runs when the product is being initialized and given a durable direction, when the user explicitly asks to write confirmed decisions or directly evidenced current facts into the fixed five documents, or when the user asks to consolidate and re-found its core vision, requirements, and user intent.
 
-It organizes confirmed product decisions and the verifiable starting truth into exactly five core documents. It does not perform routine audits, cleanup, corrections, status refreshes, ROADMAP maintenance, Spec authoring, or implementation.
+It organizes confirmed product decisions and directly evidenced current truth into exactly five core documents. It does not perform routine non-canon maintenance, no-decision cleanup or corrections, status refreshes, ROADMAP maintenance, Spec authoring, or implementation.
 
 It applies to software, AI/model/data, hardware/firmware/IoT/robotics, and hybrid technical products. A qualifying product has a versioned workspace, explicit user outcomes, an explainable system structure, verifiable completion conditions, a delivery route, and current implementation, prototype, or operational evidence. Generic project management, marketing or content work, personal planning, and research without a product delivery target are out of scope.
 
@@ -155,14 +162,15 @@ During initialization or an explicit canon re-foundation, create exactly these f
 
 The templates fix only the filenames, responsibilities, and minimum structure. Use `UNKNOWN` or `NOT_VERIFIED` when information is missing. Never guess and never create a sixth core authority file.
 
-### Use it in only two situations
+### Use it in only three situations
 
 | Situation | Entry | Result |
 | --- | --- | --- |
 | The user initializes a repository-based technical product and sets its direction, or a product-focused `grilling` interview has ended with confirmed shared understanding | Technical-product initialization, including a Grilling handoff | Create the fixed five documents and materialize the confirmed decisions |
+| The user explicitly asks to write confirmed decisions or directly evidenced current facts into one or more fixed core documents; after `grilling`, use this when the five documents already exist | Targeted fixed-five update | Change only the affected documents and preserve the other authorities |
 | The user explicitly asks to consolidate/rebuild the technical product's core vision, requirements, or user intent | Explicit canon re-foundation | Preserve every still-valid decision and keep non-canon material |
 
-Do not trigger this skill for ordinary reading, reviews, audits, cleanup, corrections, status refreshes, ROADMAP maintenance, Spec checks, acceptance checks, or implementation work.
+Do not trigger this skill for non-canon maintenance, no-decision reading/reviews/audits/cleanup/corrections, status refreshes, ROADMAP maintenance without a confirmed product change, Spec checks, acceptance checks, or implementation work.
 
 ### Authority and delivery
 
@@ -206,6 +214,12 @@ Explicit canon re-foundation:
 
 ```text
 Use $product-canon to consolidate and re-found this repository-based technical product's core vision, requirements, and user intent. Preserve the complete valid product route and non-canon history. Do not create a Spec.
+```
+
+Targeted fixed-five update:
+
+```text
+Use $product-canon to write the confirmed product decision or directly evidenced current fact into the fixed five documents. Change only the affected documents. Do not create a Spec.
 ```
 
 ### Repository layout

@@ -1,4 +1,4 @@
 interface:
   display_name: "Product Canon"
-  short_description: "初始化或显式重建仓库内技术产品的固定五文件核心权威"
-  default_prompt: "使用 $product-canon，为这个仓库内的技术产品定调并初始化固定五个核心文件；如果已有核心材料，完整归并其产品意志和路线，只把用户明确批准的结果放入 Spec 交接表；不做日常审计、维护或 Spec 工作。"
+  short_description: "初始化、更新或显式重建仓库内技术产品的固定五文件核心权威"
+  default_prompt: "使用 $product-canon，为这个仓库内的技术产品初始化、定向更新或归并重建固定五个核心文件；只把已确认的产品决定或有直接证据的当前事实写入受影响文件；不做普通文档维护、Spec 或实现工作。"

@@ -1,6 +1,6 @@
 ---
 name: product-canon
-description: "Initialize or explicitly re-found the durable product canon of a repository-based technical product as exactly five fixed documents under docs/product: PRODUCT.md, ARCHITECTURE.md, ACCEPTANCE.md, ROADMAP.md, and CURRENT_STATE.md. Applies to software, AI/model/data, hardware/firmware/IoT/robotics, and hybrid technical products with a versioned workspace and verifiable delivery evidence. Use only when the user initializes the product and sets its direction, a completed product-focused grilling interview hands off confirmed decisions, or the user explicitly requests a full consolidation/re-foundation of core vision, requirements, and user intent. Do not trigger for generic project management, content or marketing work, research without a product delivery target, ordinary document maintenance, ROADMAP maintenance, Spec work, implementation, or acceptance checking."
+description: "Initialize, update, or explicitly re-found the durable product canon of a repository-based technical product as exactly five fixed documents under docs/product: PRODUCT.md, ARCHITECTURE.md, ACCEPTANCE.md, ROADMAP.md, and CURRENT_STATE.md. Applies to software, AI/model/data, hardware/firmware/IoT/robotics, and hybrid technical products with a versioned workspace and verifiable delivery evidence. Use when the user initializes the product and sets its direction, a completed product-focused grilling interview hands off confirmed decisions, the user explicitly asks to update one or more fixed core documents from confirmed decisions or evidence, or the user explicitly requests a full consolidation/re-foundation of core vision, requirements, and user intent. Do not trigger for non-canon document maintenance, generic project management, content or marketing work, research without a product delivery target, ROADMAP maintenance without a confirmed product change, Spec work, implementation, or acceptance checking."
 ---
 
 # Product Canon
@@ -46,14 +46,15 @@ description: "Initialize or explicitly re-found the durable product canon of a r
 
 ## 触发闸门
 
-只允许以下两类入口：
+只允许以下三类入口：
 
 1. **技术产品定调初始化**：用户明确要初始化仓库内技术产品、确定产品方向并输出核心文档；或者产品类 Grilling 连续追问已经结束、用户确认形成共同理解，由 Grilling 自动交接已确认决定。
-2. **显式归并重建**：用户明确要求把当前技术产品分散的核心、愿景、需求或用户核心意志重新归纳为权威文档。
+2. **固定五文件定向更新**：用户明确要求把已确认的产品决定、架构规则、验收标准、产品路线变化或有直接证据的当前事实写入一个或多个固定核心文件。产品类 Grilling 已结束后的交接，在五文件已经存在时走此入口；尚未建立时走初始化入口。
+3. **显式归并重建**：用户明确要求把当前技术产品分散的核心、愿景、需求或用户核心意志重新归纳为权威文档。
 
-除此之外不要启用本 Skill。普通阅读、检查、审计、评审、整理、纠错、同步状态、维护 ROADMAP、核对 Spec、验收声明或实现工作，都由普通任务或对应专业流程处理。即使某份核心文档可能过时，也不能因此隐式触发。
+除此之外不要启用本 Skill。普通非核心文档维护、无新决定的润色、普通阅读、检查、审计、评审、纠错、同步状态、维护 ROADMAP、核对 Spec、验收声明或实现工作，都由普通任务或对应专业流程处理。仅凭某份核心文档可能过时，不能隐式触发；定向更新必须有用户确认的变更或直接证据。
 
-本 Skill 只有两种执行形态：首次**建立**，或在用户明确要求下进行一次完整的**归并重建**。它不提供日常“修正模式”或独立“审计模式”。归并重建内部仍要做迁移覆盖检查，但该检查不能作为单独使用场景。
+本 Skill 有三种执行形态：首次**建立**、用户明确要求下的**定向更新**，或完整的**归并重建**。定向更新只修改受影响的固定核心文件，不顺手重写其余文件；它也不提供无用户确认的日常修正模式或独立审计模式。归并重建内部仍要做迁移覆盖检查，但该检查不能作为单独使用场景。
 
 ## 执行流程
 
@@ -67,6 +68,14 @@ description: "Initialize or explicitly re-found the durable product canon of a r
 4. 仅在核对当前事实时读取最小范围的实现资产、差异、原型或运行证据。
 
 不要为了完整而扫描无关实现资产、历史聊天、旧报告或全部 Spec。
+
+### 1.1 选择执行形态
+
+- **建立**：固定五文件尚不存在时，按模板一次建立五个文件。
+- **定向更新**：固定五文件已存在时，只更新用户确认或证据直接涉及的文件；未涉及的文件保持不变。
+- **归并重建**：需要跨多个旧来源重新划分产品权威时，先做迁移映射，再按归并规则重建。
+
+Grilling 交接必须先判断五文件是否已存在，再选择建立或定向更新；不能因为交接发生就默认重建全部文件。
 
 ### 2. 建立声明映射
 
@@ -137,7 +146,7 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 
 允许的状态只有：`PROPOSED`、`APPROVED`、`SPECIFIED`、`IMPLEMENTING`、`BLOCKED`、`ACCEPTED`。
 
-本 Skill 只在建立或显式归并重建时生成 ROADMAP 结构并记录当次已确认决定；它不负责日常维护 ROADMAP，不创建或修改 Spec、plan、tasks，不执行切片，也不充当调度器。Speckit 或其它领域规格流程可以消费一个合格的 `APPROVED` 条目。
+本 Skill 只在建立、固定五文件定向更新或显式归并重建时写入固定五文件；建立/重建生成结构，定向更新只记录本次确认的变化。它不负责无新产品决定的日常 ROADMAP 维护，不创建或修改 Spec、plan、tasks，不执行切片，也不充当调度器。Speckit 或其它领域规格流程可以消费一个合格的 `APPROVED` 条目。
 
 ## 验证
 
@@ -163,7 +172,7 @@ ID | User outcome | Boundary | Dependencies | Acceptance | Status | Spec
 
 最多输出五项：
 
-1. 使用的入口：技术产品定调初始化（含 Grilling 交接）或显式归并重建。
+1. 使用的入口：技术产品定调初始化（含 Grilling 交接）、固定五文件定向更新或显式归并重建。
 2. 固定五个核心文件及非核心文档的保留状态。
 3. 实际修改或迁移位置。
 4. 未解决的用户决定；没有则写“无”。
